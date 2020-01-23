@@ -8,8 +8,9 @@ import com.luv2code.hibernate.demo.entity.Course;
 import com.luv2code.hibernate.demo.entity.Instructor;
 import com.luv2code.hibernate.demo.entity.InstructorDetail;
 import com.luv2code.hibernate.demo.entity.Review;
+import com.luv2code.hibernate.demo.entity.Student;
 
-public class CreateDemo {
+public class GetCourseForMaryDemo {
 
 	public static void main(String args[]) {
 		
@@ -19,6 +20,7 @@ public class CreateDemo {
 				.addAnnotatedClass(InstructorDetail.class)
 				.addAnnotatedClass(Course.class)
 				.addAnnotatedClass(Review.class)
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 		
 		Session session=factory.getCurrentSession();
@@ -27,7 +29,13 @@ public class CreateDemo {
 			
 			session.beginTransaction();
 
-	
+			int theId=2;
+			
+			Student tempStudent = session.get(Student.class, theId);
+			
+			System.out.println("Student information:"+tempStudent);
+			System.out.println("Course: "+tempStudent.getCourses());
+			
 			session.getTransaction().commit();
 			System.out.println("Done!");
 						
